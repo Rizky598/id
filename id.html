@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>🤖𝐑𝐈𝐙𝐊𝐘 𝐀𝐏𝐏 𝐒𝐓𝐎𝐑𝐄🤖</title>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Background Video */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+        }
+
+        /* Overlay untuk membuat teks lebih terbaca */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+
+        /* Container utama */
+        .container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Header dengan foto profil */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            margin-top: 20px;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* Teks transparan */
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            margin-bottom: 10px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            margin-bottom: 30px;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), 0 0 10px rgba(255, 255, 255, 0.3);
+            }
+            to {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        /* Card produk */
+        .product-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .product-title {
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            margin-bottom: 15px;
+        }
+
+        .product-description {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: rgba(255, 215, 0, 0.9);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            margin-bottom: 25px;
+        }
+
+        /* Tombol */
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background: linear-gradient(45deg, #128C7E, #25D366);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-instagram {
+            background: linear-gradient(45deg, #E4405F, #C13584, #833AB4);
+            color: white;
+        }
+
+        .btn-instagram:hover {
+            background: linear-gradient(45deg, #C13584, #E4405F, #833AB4);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(228, 64, 95, 0.4);
+        }
+
+        .btn-tiktok {
+            background: linear-gradient(45deg, #000000, #ff0050);
+            color: white;
+        }
+
+        .btn-tiktok:hover {
+            background: linear-gradient(45deg, #ff0050, #000000);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 0, 80, 0.4);
+        }
+
+        /* Social media section */
+        .social-section {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .social-title {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            margin-bottom: 20px;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Features list */
+        .features {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .features-title {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .feature-item {
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .feature-item:before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .product-card {
+                margin: 15px 10px;
+                padding: 20px;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+                margin: 8px;
+            }
+            
+            .social-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .profile-image {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .title {
+                font-size: 1.8rem;
+            }
+            
+            .product-card {
+                padding: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+
+        /* Animasi masuk */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Tombol Mute/Unmute */
+        .mute-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .mute-button:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        @media (max-width: 480px) {
+            .mute-button {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                top: 10px;
+                right: 10px;
+            }
+        }
+    
+.bot-showcase {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+.bot-image {
+  max-width: 90%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  margin-top: 20px;
+  transition: transform 0.3s ease;
+}
+.bot-image:hover {
+  transform: scale(1.03);
+}
+</style>
+</head>
+<body>
+<div id="startOverlay" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;background:#000a;display:flex;justify-content:center;align-items:center;flex-direction:column;">
+<button id="startButton" style="padding:15px 30px;font-size:1.5rem;border:none;border-radius:10px;background:linear-gradient(90deg,#00c6ff,#0072ff);color:#fff;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,0.4);">▶️ Mulai</button>
+<p style="color:white;margin-top:20px;font-size:1rem;">Klik tombol untuk memulai dengan suara</p>
+</div>
+<!-- Background Video -->
+<video autoplay="" class="video-background" id="backgroundVideo" loop="" muted="" playsinline="">
+<source src="https://g.top4top.io/m_34525ghu60.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+</video>
+<!-- Mute/Unmute Button -->
+<button class="mute-button" id="muteButton">🔇</button>
+<!-- Overlay -->
+<div class="overlay"></div>
+<!-- Main Container -->
+<div class="container">
+<!-- Header -->
+<div class="header fade-in">
+<img alt="Profile" class="profile-image floating" src="https://i.top4top.io/p_3452xmhfk0.jpg"/>
+<h1 class="title">🤖𝐑𝐈𝐙𝐊𝐘 𝐀𝐏𝐏 𝐒𝐓𝐎𝐑𝐄🤖</h1>
+<p class="subtitle">Rizky App Store Solusi Otomatis Terbaik</p>
+</div>
+<!-- Product Card -->
+<div class="product-card fade-in">
+<h2 class="product-title">Bot WhatsApp Canggih</h2>
+<p class="product-description">
+                Bot WhatsApp dengan fitur lengkap untuk membantu bisnis Anda
+                Dilengkapi dengan auto reply broadcast message dan banyak fitur menarik lainnya!
+            </p>
+<div class="price">Rp 35.000</div>
+<a class="btn btn-whatsapp" href="https://wa.me/6283850540570?text=Halo%20admin%20saya%20tertarik%20dengan%20Bot%20WhatsApp%20Premium😊" target="_blank">
+                💬 Chat Admin Sekarang
+            </a>
+</div>
+<div class="features fade-in">
+<h3 class="features-title">✨ Fitur Unggulan</h3>
+<div class="feature-item">Auto Reply Cerdas</div>
+<div class="feature-item">Broadcast Message</div>
+<div class="feature-item">Anti Spam Protection</div>
+<div class="feature-item">Custom Commands</div>
+<div class="feature-item">24/7 Online</div>
+<div class="feature-item">Easy Setup</div>
+<div class="feature-item">menu ai</div>
+<div class="feature-item">menu grup</div>
+<div class="feature-item">Menu anti Link</div>
+</div>
+<!-- Panel Sosmed Premium - 6 Paket -->
+<div class="product-card fade-in">
+<h2 class="product-title">🌐𝐓𝐈𝐃𝐀𝐊 𝐅𝐑𝐄𝐄🌐</h2>
+<p class="product-description">
+<strong>Spesifikasi:</strong><br/>
+        🧠 CPU: 60%<br/>
+        📦 DISK: 1500<br/>
+        💾 RAM: 1500<br/>
+        ⚙️ Uptime: 98.5%<br/>
+        🌍 Lokasi: Indonesia
+    </p>
+<p class="product-description">Garansi panel 5 hari kalau ada masalah bisa tukar yang baru</p>
+<div class="price">Rp 5.000</div>
+<a class="btn btn-whatsapp" href="https://wa.me/6283850540570?text=Saya%20tertarik%20paket%205rb" target="_blank">🛒 Pesan Sekarang</a>
+</div>
+<div class="product-card fade-in">
+<h2 class="product-title">🌐𝐓𝐈𝐃𝐀𝐊 𝐅𝐑𝐄𝐄🌐</h2>
+<p class="product-description">
+<strong>Spesifikasi:</strong><br/>
+        🧠 CPU: 100%<br/>
+        📦 DISK: 2500 MB<br/>
+        💾 RAM: 2500 MB<br/>
+        ⚙️ Uptime: 99%<br/>
+        🌍 Lokasi: Indonesia
+    </p>
+<p class="product-description">Garansi panel 5 hari kalau ada masalah bisa tukar yang baru</p>
+<div class="price">Rp 8.000</div>
+<a class="btn btn-whatsapp" href="https://wa.me/6283850540570?text=Saya%20tertarik%20paket%208rb" target="_blank">🛒 Pesan Sekarang</a>
+</div>
+<div class="product-card fade-in">
+<h2 class="product-title">🌐𝐓𝐈𝐃𝐀𝐊 𝐅𝐑𝐄𝐄🌐</h2>
+<p class="product-description">
+<strong>Spesifikasi:</strong><br/>
+        🧠 CPU: 120%<br/>
+        📦 DISK: 3000<br/>
+        💾 RAM: 3000<br/>
+        ⚙️ Uptime: 99%<br/>
+        🌍 Lokasi: Indonesia
+    </p>
+<p class="product-description">Garansi panel 5 hari kalau ada masalah bisa tukar yang baru</p>
+<div class="price">Rp 10.000</div>
+<a class="btn btn-whatsapp" href="https://wa.me/6283850540570?text=Saya%20tertarik%20paket%2010rb" target="_blank">🛒 Pesan Sekarang</a>
+</div>
+<div class="product-card fade-in">
+<h2 class="product-title">🌐𝐏𝐀𝐍𝐄𝐋 𝐏𝐑𝐄𝐌𝐈𝐔𝐌🌐</h2>
+<p class="product-description">
+<strong>Spesifikasi:</strong><br/>
+        🧠 CPU: 180%<br/>
+        📦 DISK: 4500<br/>
+        💾 RAM: 4500<br/>
+        ⚙️ Uptime: 99.5%<br/>
+        🌍 Lokasi: Indonesia
+    </p>
+<p class="product-description">Garansi panel 5 hari kalau ada masalah bisa tukar yang baru</p>
+<div class="price">Rp 15.000</div>
+<a class="btn btn-whatsapp" href="https://wa.me/6283850540570?text=Saya%20tertarik%20paket%2015rb" target="_blank">🛒 Pesan Sekarang</a>
+</div>
+<div class="product-card fade-in">
+<h2 class="product-title">🌐𝐏𝐀𝐍𝐄𝐋 𝐏𝐑𝐄𝐌𝐈𝐔𝐌🌐</h2>
+<p class="product-description">
+<strong>Spesifikasi:</strong><br/>
+        🧠 CPU: 260%<br/>
+        📦 DISK: 6500<br/>
+        💾 RAM: 6500<br/>
+        ⚙️ Uptime: 99.9%<br/>
+        🌍 Lokasi: Indonesia
+    </p>
+<p class="product-description">Garansi panel 5 hari kalau ada masalah bisa tukar yang baru</p>
+<div class="price">Rp 20.000</div>
+<a class="btn btn-whatsapp" href="https://wa.me/6283850540570?text=Saya%20tertarik%20paket%2020rb" target="_blank">🛒 Pesan Sekarang</a>
+</div>
+<div class="product-card fade-in">
+<h2 class="product-title">🌐𝐏𝐀𝐍𝐄𝐋 𝐏𝐑𝐄𝐌𝐈𝐔𝐌🌐</h2>
+<p class="product-description">
+<strong>Spesifikasi:</strong><br/>
+        🧠 CPU: Tidak terbatas<br/>
+        📦 DISK: Tidak terbatas<br/>
+        💾 RAM: Tidak terbatas<br/>
+        ⚙️ Uptime: 100%<br/>
+        🌍 Lokasi: Indonesia
+    </p>
+<p class="product-description">Garansi panel 5 hari kalau ada masalah bisa tukar yang baru</p>
+<div class="price">Rp 25.000</div>
+<a class="btn btn-whatsapp" href="https://wa.me/6283850540570?text=Saya%20tertarik%20paket%2025rb" target="_blank">🛒 Pesan Sekarang</a>
+</div>
+<!-- Social Media Section -->
+<div class="social-section fade-in">
+<h3 class="social-title">🌟 Follow Media Sosial Kami</h3>
+<div class="social-buttons">
+<a class="btn btn-instagram" href="https://www.instagram.com/rizky.0_o?igsh=bGJ6dGdvYnR6Y3c2" target="_blank">
+                    📸 Instagram
+</a>
+<a class="btn btn-tiktok" href="https://www.tiktok.com/@rizky.cyber?_t=ZS-8xBxKpqIgy8&amp;_r=1" target="_blank">
+                    🎵 tiktok
+</a>
+<div style="text-align:center; margin-top:40px;">
+<a class="btn btn-whatsapp" href="https://chat.whatsapp.com/Jmbs0K52j3fB4FOP5wViWX" style="display:inline-block;padding:15px 30px;border:none;border-radius:50px;font-size:1.1rem;font-weight:bold;text-decoration:none;background:linear-gradient(45deg,#25D366,#128C7E);color:white;box-shadow:0 4px 15px rgba(0,0,0,0.3);transition:all 0.3s ease;" target="_blank">
+    👥Gabung Grup WhatsApp
+  </a>
+</div>
+</div>
+</div>
+<script>
+
+document.getElementById("startButton").addEventListener("click", function () {
+    const video = document.getElementById("backgroundVideo");
+    const overlay = document.getElementById("startOverlay");
+    video.muted = false;
+    video.play().then(() => {
+        overlay.style.display = "none";
+    }).catch(err => {
+        console.error("Playback failed:", err);
+    });
+});
+
+</script></div>
+<!-- Showcase Tampilan Bot -->
+<div class="bot-showcase fade-in">
+<h3 class="features-title">📱 Tampilan Bot WhatsApp</h3>
+<img alt="Tampilan Bot" class="bot-image" src="https://i.top4top.io/p_3452xmhfk0.jpg"/>
+</div>
+</body>
