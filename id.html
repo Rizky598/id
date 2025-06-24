@@ -1,4 +1,27 @@
 <!DOCTYPE html>
+<div id="visit-stats" style="position:fixed;bottom:10px;right:10px;background:rgba(0,0,0,0.7);color:white;padding:10px 15px;border-radius:8px;font-size:0.9rem;z-index:999;">
+  Menghitung statistik...
+</div>
+
+<script>
+  // Hitung durasi kunjungan
+  let startTime = Date.now();
+  let totalVisits = localStorage.getItem('totalVisits');
+  totalVisits = totalVisits ? parseInt(totalVisits) + 1 : 1;
+  localStorage.setItem('totalVisits', totalVisits);
+
+  function updateStats() {
+    const now = Date.now();
+    const duration = Math.floor((now - startTime) / 1000); // detik
+    const minutes = Math.floor(duration / 60);
+    const seconds = duration % 60;
+
+    document.getElementById('visit-stats').innerHTML =
+      `👤 Kunjungan ke ${totalVisits}<br>🕒 Durasi: ${minutes}m ${seconds}s`;
+  }
+
+  setInterval(updateStats, 1000);
+</script>
 
 <head>
 <meta charset="utf-8"/>
@@ -509,6 +532,20 @@
 <a class="btn btn-whatsapp" href="https://wa.me/6283850540570?text=Saya%20tertarik%20paket%2025rb" target="_blank">🛒 Pesan Sekarang</a>
 </div>
 <!-- Social Media Section -->
+
+<!-- QRIS Payment Section -->
+<div class="product-card fade-in">
+  <h2 class="product-title">💳 Pembayaran Otomatis (QRIS)</h2>
+  <p class="product-description">
+    Scan barcode di bawah ini untuk membayar <strong>Rp 35.000</strong><br/>
+    Setelah pembayaran berhasil, file bot WhatsApp akan dikirim otomatis ke WhatsApp Anda.
+  </p>
+  <img src="https://a.top4top.io/p_3462hkcgi0.jpg" alt="QRIS" style="width: 300px; max-width: 100%; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); margin: 20px 0;">
+  <a class="btn btn-whatsapp" href="https://wa.me/6283850540570?text=Halo%20saya%20sudah%20bayar%20melalui%20QRIS%20dan%20ingin%20menerima%20file%20Bot%20WhatsApp" target="_blank">
+    ✅ Saya Sudah Bayar, Kirim Bot
+  </a>
+</div>
+
 <div class="social-section fade-in">
 <h3 class="social-title">🌟 Follow Media Sosial Kami</h3>
 <div class="social-buttons">
